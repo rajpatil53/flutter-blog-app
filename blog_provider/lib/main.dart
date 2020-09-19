@@ -1,6 +1,7 @@
+import 'package:blog_provider/app/constants.dart';
 import 'package:blog_provider/providers.dart';
 import 'package:blog_provider/router.dart';
-import 'package:blog_provider/services/api/auth.dart';
+import 'package:blog_provider/services/api/user.dart';
 import 'package:blog_provider/views/home/home_view.dart';
 import 'package:blog_provider/views/login/login_view.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +21,16 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        darkTheme: ThemeData.dark(),
+        themeMode: ThemeMode.dark,
+        darkTheme: ThemeData.dark().copyWith(
+          accentColor: Colors.amberAccent,
+          textTheme: textTheme,
+        ),
         theme: ThemeData(
           primarySwatch: Colors.amber,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+          textTheme: textTheme,
         ),
-        home: Consumer<AuthService>(builder: (_, auth, __) {
+        home: Consumer<UserService>(builder: (_, auth, __) {
           return auth.loggedInUser != null ? HomeView() : LoginView();
         }),
         onGenerateRoute: Router.generateRoute,

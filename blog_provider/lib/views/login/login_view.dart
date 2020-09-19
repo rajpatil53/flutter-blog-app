@@ -1,5 +1,5 @@
 import 'package:blog_provider/app/constants.dart';
-import 'package:blog_provider/services/api/auth.dart';
+import 'package:blog_provider/services/api/user.dart';
 import 'package:blog_provider/views/base_view.dart';
 import 'package:blog_provider/views/login/login_view_model.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +17,8 @@ Widget loginView(BuildContext context) {
       useTextEditingController(text: 'password');
 
   return BaseView<LoginViewModel>(
-    model: LoginViewModel(auth: Provider.of<AuthService>(context)),
+    model: LoginViewModel(auth: Provider.of<UserService>(context)),
     builder: (_, viewModel, __) => Scaffold(
-      backgroundColor: Colors.grey.shade900,
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -29,7 +28,6 @@ Widget loginView(BuildContext context) {
               controller: _idController,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                fillColor: Colors.grey.shade500,
                 filled: true,
               ),
             ),
@@ -39,23 +37,23 @@ Widget loginView(BuildContext context) {
               obscureText: true,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                fillColor: Colors.grey.shade500,
                 filled: true,
               ),
             ),
             SizedBox(
               height: 20,
             ),
-            viewModel.state == ViewState.Busy
-                ? CircularProgressIndicator()
-                : MaterialButton(
-                    onPressed: () {
-                      viewModel.login(_idController.text, _pwController.text);
-                    },
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white,
-                    child: Text('Login'),
-                  )
+            Builder(
+              builder: (ctx) => viewModel.state == ViewState.Busy
+                  ? CircularProgressIndicator()
+                  : MaterialButton(
+                      onPressed: () {
+                        viewModel.login(
+                            _idController.text, _pwController.text, ctx);
+                      },
+                      child: Text('Login'),
+                    ),
+            )
           ],
         ),
       ),
