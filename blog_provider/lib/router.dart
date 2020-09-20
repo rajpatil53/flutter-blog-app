@@ -13,6 +13,8 @@ class Router {
       case RoutePaths.Post:
         var post = settings.arguments as Post;
         return MaterialPageRoute(builder: (_) => PostView(post));
+      default:
+        return MaterialPageRoute(builder: (_) => HomeView());
     }
   }
 }

@@ -7,21 +7,52 @@ part 'comments.g.dart';
 
 @hwidget
 Widget comments(BuildContext context, List<Comment> _comments) {
-  return ListView.builder(
-    itemCount: _comments.length,
-    itemBuilder: (_, index) => buildSingleComment(_comments[index]),
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Comments',
+        style: Theme.of(context).textTheme.headline1,
+        textAlign: TextAlign.left,
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Expanded(
+        child: ListView.builder(
+          itemCount: _comments.length,
+          itemBuilder: (_, index) =>
+              buildSingleComment(_comments[index], context),
+        ),
+      ),
+    ],
   );
 }
 
-Widget buildSingleComment(Comment comment) {
+Widget buildSingleComment(Comment comment, BuildContext context) {
   return Card(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(comment.name),
-        Text(comment.email),
-        Text(comment.body),
-      ],
+    child: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            comment.name,
+            style: Theme.of(context).textTheme.headline2,
+          ),
+          Text(
+            comment.email,
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            comment.body,
+            style: Theme.of(context).textTheme.bodyText2,
+          ),
+        ],
+      ),
     ),
   );
 }

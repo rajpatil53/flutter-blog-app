@@ -32,7 +32,7 @@ class UserServiceImpl with ChangeNotifier implements UserService {
       }
       _user = user;
     } else {
-      throw Exception("User does not exists");
+      throw Exception("Incorrect username (Enter a number between 1 & 10)");
     }
     notifyListeners();
   }

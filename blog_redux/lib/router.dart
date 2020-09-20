@@ -1,4 +1,6 @@
 import 'package:blog_redux/store/actions/actions.dart';
+import 'package:blog_redux/views/home/home_view.dart';
+import 'package:blog_redux/views/home/home_view_model.dart';
 import 'package:blog_redux/views/posts/post_view.dart';
 import 'package:blog_redux/views/posts/post_view_model.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,8 @@ class Router {
             builder: (_, model) => PostView(post, model),
           ),
         );
+      default:
+        return MaterialPageRoute(builder: (_) => HomeView(HomeViewModel()));
     }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:blog_bloc/services/auth/cubit/auth_cubit.dart';
+import 'package:blog_bloc/blocs/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
@@ -12,11 +12,10 @@ Widget loginView(BuildContext context) {
       useTextEditingController(text: '1');
   final TextEditingController _pwController =
       useTextEditingController(text: 'password');
-
-  // final AuthCubit auth = BlocProvider.of<AuthCubit>(context);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   return Scaffold(
-    backgroundColor: Colors.grey.shade900,
+    key: _scaffoldKey,
     body: Padding(
       padding: EdgeInsets.all(20),
       child: Column(
@@ -26,7 +25,6 @@ Widget loginView(BuildContext context) {
             controller: _idController,
             decoration: InputDecoration(
               border: InputBorder.none,
-              fillColor: Colors.grey.shade500,
               filled: true,
             ),
           ),
@@ -36,7 +34,6 @@ Widget loginView(BuildContext context) {
             obscureText: true,
             decoration: InputDecoration(
               border: InputBorder.none,
-              fillColor: Colors.grey.shade500,
               filled: true,
             ),
           ),
@@ -49,8 +46,6 @@ Widget loginView(BuildContext context) {
                 : MaterialButton(
                     onPressed: () => BlocProvider.of<AuthCubit>(context)
                         .login(_idController.text, _pwController.text),
-                    color: Colors.grey.shade800,
-                    textColor: Colors.white,
                     child: Text('Login'),
                   ),
           ),

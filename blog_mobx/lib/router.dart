@@ -1,5 +1,6 @@
 import 'package:blog_mobx/app/constants.dart';
 import 'package:blog_mobx/models/post.dart';
+import 'package:blog_mobx/views/home_view.dart';
 import 'package:blog_mobx/views/post_view.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,8 @@ class Router {
       case RoutePaths.Post:
         var post = settings.arguments as Post;
         return MaterialPageRoute(builder: (_) => PostView(post));
+      default:
+        return MaterialPageRoute(builder: (_) => HomeView());
     }
   }
 }

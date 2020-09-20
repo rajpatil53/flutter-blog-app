@@ -15,6 +15,7 @@ class AuthService {
       User user = await getUser(id);
       return user;
     }
+    return null;
   }
 
   static Future<User> getUser(String id) async {

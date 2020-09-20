@@ -1,7 +1,8 @@
+import 'package:blog_bloc/app/constants.dart';
+import 'package:blog_bloc/blocs/auth/cubit/auth_cubit.dart';
+import 'package:blog_bloc/blocs/comments/bloc/comment_bloc.dart';
+import 'package:blog_bloc/blocs/post/bloc/post_bloc.dart';
 import 'package:blog_bloc/router.dart';
-import 'package:blog_bloc/services/auth/cubit/auth_cubit.dart';
-import 'package:blog_bloc/services/comments/bloc/comment_bloc.dart';
-import 'package:blog_bloc/services/post/bloc/post_bloc.dart';
 import 'package:blog_bloc/views/home_view.dart';
 import 'package:blog_bloc/views/login_view.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +32,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        darkTheme: ThemeData.dark(),
+        themeMode: ThemeMode.dark,
+        darkTheme: ThemeData.dark().copyWith(
+          accentColor: Colors.amberAccent,
+          textTheme: textTheme,
+        ),
         theme: ThemeData(
           primarySwatch: Colors.amber,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+          textTheme: textTheme,
         ),
         home: App(),
         onGenerateRoute: Router.generateRoute,

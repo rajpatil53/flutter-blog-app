@@ -5,8 +5,8 @@ part 'user.g.dart';
 class User {
   final int id;
   final String name;
-  // final String name;
-  User({this.id, this.name});
+  List<int> likedPosts;
+  User({this.id, this.name, this.likedPosts});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);

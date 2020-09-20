@@ -1,6 +1,6 @@
+import 'package:blog_bloc/blocs/auth/cubit/auth_cubit.dart';
+import 'package:blog_bloc/blocs/post/bloc/post_bloc.dart';
 import 'package:blog_bloc/models/user.dart';
-import 'package:blog_bloc/services/auth/cubit/auth_cubit.dart';
-import 'package:blog_bloc/services/post/bloc/post_bloc.dart';
 import 'package:blog_bloc/widgets/post_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,10 +32,31 @@ Widget homeView(BuildContext context) {
         )
       ],
     ),
+    bottomNavigationBar: BlocBuilder<PostBloc, PostState>(
+      builder: (_, postState) => BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment),
+            title: Text('All Posts'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment_ind),
+            title: Text('My Posts'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            title: Text('Liked Posts'),
+          ),
+        ],
+        currentIndex: postState.tabIndex,
+        onTap: (index) =>
+            BlocProvider.of<PostBloc>(context).add(FilterPosts(index, _user)),
+      ),
+    ),
     body: BlocBuilder<PostBloc, PostState>(
       builder: (_, postState) {
         return postState is PostsFetched
-            ? PostList(postState.posts)
+            ? PostList(postState.filteredPosts)
             : Center(
                 child: CircularProgressIndicator(),
               );

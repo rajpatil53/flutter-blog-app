@@ -55,7 +55,6 @@ Widget postView(BuildContext context, Post _post) {
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Divider(),
-            Divider(),
             model.state == ViewState.Busy
                 ? CircularProgressIndicator()
                 : Expanded(child: Comments(model.comments)),
